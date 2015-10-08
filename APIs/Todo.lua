@@ -19,6 +19,7 @@ function Todo:getTodos( )      -- GET method on /todos
 		local todos, pos, err = json.decode( todosJson )
 		if err then
 			print( "Error:", err )
+			return false, 0
 		else
 			local timeStamp = utils.makeTimeStamp(todos[#todos].lastUpdated)
 			todos[#todos] = nil
@@ -26,7 +27,7 @@ function Todo:getTodos( )      -- GET method on /todos
 		end
 	else
 		print( "Error:", todosJson, c, h )
-		return false
+		return false, 0 
 	end
 end
 
@@ -47,6 +48,7 @@ function Todo:getTodo( id )    -- GET method on /todos/<id>
 		local todos, pos, err = json.decode( todosJson )
 		if err then
 			print( "Error:", err, "Response:", todosJson,c,h )
+			return false, 0
 		else
 			local timeStamp = utils.makeTimeStamp( todos[#todos].lastUpdated )
 			todos[#todos] = nil
@@ -54,7 +56,7 @@ function Todo:getTodo( id )    -- GET method on /todos/<id>
 		end
 	else
 		print( "Error:", todosJson, c, h )
-		return false
+		return false, 0 
 	end
 end
 
